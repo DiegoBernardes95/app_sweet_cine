@@ -73,6 +73,7 @@ class _EmBrevePageState extends State<EmBrevePage> {
     } else{
       if(selecao == "Assistido"){
         filmesFiltrados = listarFilmes.filmesEmBreve.where((filme) => filme.assistido).toList();
+        filmesFiltrados.sort((a, b) => b.dataLancamento.compareTo(a.dataLancamento));
       } else if(selecao == "Não assistido"){
         filmesFiltrados = listarFilmes.filmesEmBreve.where((filme) => !filme.assistido).toList();
       } else if(selecao == "Todos"){
