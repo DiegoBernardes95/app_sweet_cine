@@ -632,7 +632,7 @@ class _PerfilFilmePageState extends State<PerfilFilmePage> {
                       return CustomMostrarTextos(
                         titulo: "Na minha opinião...", 
                         imagemBackground: perfilFilme.filmePeloId.capa, 
-                        texto: perfilFilme.filmePeloId.comentario.isEmpty ? "Sem comentário" : perfilFilme.filmePeloId.comentario
+                        texto: perfilFilme.filmePeloId.comentario.isEmpty ? "Sem comentário..." : perfilFilme.filmePeloId.comentario
                       );
                     }
                   );

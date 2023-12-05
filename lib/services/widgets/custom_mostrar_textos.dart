@@ -34,7 +34,13 @@ class _CustomMostrarTextosState extends State<CustomMostrarTextos> {
         ),
         child: Container(
           decoration: widget.titulo == "Na minha opinião..." ? 
-          const BoxDecoration()
+          const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Colors.black87, Colors.transparent],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter
+            )
+          )
           :
           const BoxDecoration(
             gradient: LinearGradient(
