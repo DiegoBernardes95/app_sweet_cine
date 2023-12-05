@@ -274,10 +274,22 @@ class _EmBrevePageState extends State<EmBrevePage> {
                                         actions: [
                                           TextButton(
                                             onPressed: () async {
-                                              await listarFilmes.removerAssistidos();
-                                              setState(() {
-                                                carregando = true;
-                                              });
+                                              if(listarFilmes.filmesEmBreve.where((filme) => filme.assistido).toList().isEmpty){
+                                                ScaffoldMessenger.of(context).showSnackBar(
+                                                  SnackBar(content: Row(
+                                                    children: [
+                                                      const Icon(Icons.warning, color: Colors.red),
+                                                      const SizedBox(width: 5),
+                                                      Text("Nenhum filme foi assistido até o momento...", style: GoogleFonts.montserrat(color: Colors.white)),
+                                                    ],
+                                                  ))
+                                                );
+                                              } else{
+                                                await listarFilmes.removerAssistidos();
+                                                setState(() {
+                                                  carregando = true;
+                                                });
+                                              }
                                               // ignore: use_build_context_synchronously
                                               Navigator.pop(context);
                                             }, 
