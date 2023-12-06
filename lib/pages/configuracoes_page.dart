@@ -5,9 +5,12 @@ import 'package:app_sweet_cine/repositories/filme_repository.dart';
 import 'package:app_sweet_cine/services/widgets/custom_drawer.dart';
 import 'package:app_sweet_cine/services/widgets/custom_logoApp.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ConfiguracoesPage extends StatefulWidget{
   const ConfiguracoesPage({super.key});
@@ -17,6 +20,7 @@ class ConfiguracoesPage extends StatefulWidget{
 }
 
 class _ConfiguracoesPageState extends State<ConfiguracoesPage>{
+  PackageInfo packageInfo = PackageInfo(appName: "", packageName: "", version: "", buildNumber: "");
   CinemaRepository cinemaRepository = CinemaRepository();
   FilmeRepository filmeRepository = FilmeRepository();
   bool exclusaoConfirmada = false;
@@ -31,9 +35,11 @@ class _ConfiguracoesPageState extends State<ConfiguracoesPage>{
   Future<void> carregarDados() async {
     cinemaRepository = Provider.of<CinemaRepository>(context, listen: false);
     filmeRepository = Provider.of<FilmeRepository>(context, listen: false);
+    packageInfo = await PackageInfo.fromPlatform();
 
     await cinemaRepository.obterDados();
     await filmeRepository.obterListaDeFilmes();
+    setState(() {});
   }
 
   // VERIFICA SE O COMPONENTE HOME_PAGE ESTÁ NA ARVORE DE WIDGETS
@@ -381,8 +387,89 @@ class _ConfiguracoesPageState extends State<ConfiguracoesPage>{
                   ),
                 )
               ],
-            )
+            ),
 
+            const SizedBox(height: 50),
+
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text("Sobre", style: GoogleFonts.anton(color: Colors.white, fontSize: 20)),
+                const SizedBox(height: 40),
+
+                Container(
+                  padding:  const EdgeInsets.symmetric(horizontal: 10),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text("Desenvolvedor: ", style: GoogleFonts.montserrat(color: Colors.white, fontSize: 16)),
+                        Text("Diego Bernardes", style: GoogleFonts.montserrat(color: Colors.grey))
+                      ],
+                    ),
+                  ),
+                ),
+
+                const SizedBox(height: 10),
+
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text("Versão:", style: GoogleFonts.montserrat(color: Colors.white, fontSize: 16)),
+                        Text(packageInfo.version, style: GoogleFonts.montserrat(color: Colors.grey))
+                      ],
+                    ),
+                  ),
+                ),
+
+                const SizedBox(height: 10),
+
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text("Redes Sociais:", style: GoogleFonts.montserrat(color: Colors.white, fontSize: 16)),
+                        Row(
+                          children: [
+                            InkWell(
+                              onTap: () async {
+                                await launchUrl(Uri.parse("https://www.linkedin.com/in/diegobernardes-webdev/"));
+                              }, 
+                              child: const FaIcon(FontAwesomeIcons.linkedin, color: Color.fromARGB(255, 21, 122, 173)),
+                            ),
+                            const SizedBox(width: 25),
+                        
+                            InkWell(
+                              onTap: () async {
+                                await launchUrl(Uri.parse("https://github.com/DiegoBernardes95"));
+                              }, 
+                              child: const FaIcon(FontAwesomeIcons.github, color: Colors.grey),
+                            ),
+                            const SizedBox(width: 25),
+                        
+                            InkWell(
+                              onTap: () async {
+                                await launchUrl(Uri.parse("https://www.instagram.com/diego.dovahkiin/"));
+                              }, 
+                              child: const FaIcon(FontAwesomeIcons.instagram, color: Color.fromARGB(255, 255, 63, 63)),
+                            ),
+                          ]
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+                
+              ],
+            ),
             
 
           ],

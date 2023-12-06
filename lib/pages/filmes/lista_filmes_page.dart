@@ -428,8 +428,8 @@ class _ListaFilmesPageState extends State<ListaFilmesPage> {
                                         const SizedBox(height: 5),
                                         Text(FormatacoesService.dataFormatada(filme.data).isEmpty ? "Data desconhecida" : FormatacoesService.dataFormatada(filme.data), style: GoogleFonts.cutiveMono(color: Colors.white), overflow: TextOverflow.ellipsis),
                                         const SizedBox(height: 10),
-                                        Text(filme.sinopse.isEmpty ? "Sem sinopse..." : filme.sinopse, style: 
-                                          GoogleFonts.molengo(color: Colors.white, fontSize: 14.5),
+                                        Text(filme.comentario.isEmpty ? filme.sinopse.isEmpty ? "Sem sinopse..." : filme.sinopse : "\"${filme.comentario}\"", style: 
+                                          GoogleFonts.molengo(color: Colors.white, fontSize: 14.5, fontStyle: filme.comentario.isEmpty ? FontStyle.normal : FontStyle.italic),
                                           maxLines: 6,
                                           overflow: TextOverflow.ellipsis,
                                         ),
