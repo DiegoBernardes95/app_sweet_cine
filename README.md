@@ -6,6 +6,10 @@ O objetivo da aplicação é fornecer uma ferramenta para o gerenciamento de exp
 
 ``flutter`` ``dart`` ``sqlite`` ``provider``
 
+## ⬇️ Download
+
+<p>Para fazer o download do App, <a href="https://drive.google.com/file/d/1N7PvsFh4Nei0-GlLitlwaGhcNP9astkZ/view?usp=drive_link" target='_blank'>clique aqui</a></p>
+
 ## 📱 Projeto
 
 <img src="https://github.com/DiegoBernardes95/app_sweet_cine/assets/113109526/74ebef94-24aa-4775-b901-901efb8ead37" height=350 width=180/>
